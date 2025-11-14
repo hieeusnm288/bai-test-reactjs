@@ -103,9 +103,19 @@ const EmployeeModal = ({ isOpen, onClose, employee, onSuccess }) => {
                 <Form.Item
                     label="Date of Birth"
                     name="dob"
-                    rules={[{ required: true, message: 'Please input your date of birth!' }]}
+                    rules={[
+                        { required: true, message: 'Please input your date of birth!' },
+                        {
+                            validator: (_, value) => {
+                                if (!value || value.isBefore(moment(), 'day') || value.isSame(moment(), 'day')) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('Date of birth cannot be greater than today!'));
+                            }
+                        }
+                    ]}
                 >
-                    <DatePicker />
+                    <DatePicker disabledDate={(current) => current && current > moment().endOf('day')} />
                 </Form.Item>
                 <Form.Item
                     label="Gender"

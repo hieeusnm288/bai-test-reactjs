@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button } from 'antd';
+import { Table, Button, Popconfirm  } from 'antd';
 import { getAllEmployees, deleteEmployee } from './service/employeesService'
 import EmployeeModal from './components/EmployeeModal';
 import { ToastContainer ,toast } from "react-toastify";
@@ -88,7 +88,14 @@ function App() {
       render: (text, employee) => (
         <>
           <Button onClick={() => handleEdit(employee)} className='me-3' type="primary" >Edit</Button>
-          <Button onClick={() => handleDelete(employee.id)} type="primary" danger>Delete</Button>
+          <Popconfirm
+            title="Are you sure to delete this employee?"
+            onConfirm={() => handleDelete(employee.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="primary" danger>Delete</Button>
+          </Popconfirm>
         </>
       ),
     }
