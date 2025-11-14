@@ -24,6 +24,7 @@ const EmployeeModal = ({ isOpen, onClose, employee, onSuccess }) => {
                     theme: "light",
                 });
                 onClose();
+                form.resetFields();
                 if (onSuccess) {
                     onSuccess();
                 }
@@ -49,6 +50,7 @@ const EmployeeModal = ({ isOpen, onClose, employee, onSuccess }) => {
                     theme: "light",
                 });
                 onClose();
+                form.resetFields();
                 if (onSuccess) {
                     onSuccess();
                 }
